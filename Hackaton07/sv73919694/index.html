@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>API Gateway Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    select, input, button { margin: 5px; padding: 6px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>API Gateway </h1>
+  
+  <select id="endpoint">
+    <option value="github">GitHub</option>
+    <option value="weather">Clima</option>
+    <option value="exchange">USD->PEN</option>
+    <option value="pokemon">Pokemones</option>
+    <option value="pokemonDetail">Detalle Pokémon</option>
+    <option value="rick">Rick & Morty</option>
+    <option value="rickDetail">Detalle Rick & Morty</option>
+    <option value="cocktails">Cocktails</option>
+    <option value="products">Productos</option>
+    <option value="photos">Fotos</option>
+    <option value="quotes">Citas</option>
+    <option value="randomuser">Usuario falso</option>
+    <option value="movies">Películas</option>
+    <option value="movieDetail">Detalle Película</option>
+    <option value="mars">Fotos Marte</option>
+  </select>
+  
+  <input id="param" placeholder="parámetro (usuario, ciudad, id, etc)">
+  <button onclick="consultar()">Consultar</button>
+  
+  <h3>Resultado:</h3>
+  <pre id="resultado">-</pre>
+  
+  <script>
+    async function consultar() {
+      const ep = document.getElementById("endpoint").value;
+      const param = document.getElementById("param").value;
+      let url = "http://localhost:3000/api/";
+
+      if (ep === "github") url += "github/" + param;
+      if (ep === "weather") url += "weather?city=" + param;
+      if (ep === "exchange") url += "exchange/usd-pen";
+      if (ep === "pokemon") url += "pokemon";
+      if (ep === "pokemonDetail") url += "pokemon/" + param;
+      if (ep === "rick") url += "rick/characters";
+      if (ep === "rickDetail") url += "rick/character/" + param;
+      if (ep === "cocktails") url += "cocktails/top10";
+      if (ep === "products") url += "products";
+      if (ep === "photos") url += "photos?query=" + param;
+      if (ep === "quotes") url += "quotes";
+      if (ep === "randomuser") url += "randomuser";
+      if (ep === "movies") url += "movies/now";
+      if (ep === "movieDetail") url += "movies/" + param;
+      if (ep === "mars") url += "mars/photos";
+
+      document.getElementById("resultado").textContent = "Cargando...";
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById("resultado").textContent = "Error: " + err;
+      }
+    }
+  </script>
+</body>
+</html>
