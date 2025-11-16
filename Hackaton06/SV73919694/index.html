@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Hackaton05</title>
+</head>
+
+<body class="w-full h-auto min-h-screen grid place-content-center bg-black p-5 gap-15">
+
+    <!-- Card -->
+
+    <div class="w-[90%] h-auto p-5 rounded-lg max-w-md flex flex-col bg-[#f2f2f2] shadow-2xl">
+        <section id="register-repair-form" class="hidden">
+            <h1 class="text-center uppercase font-semibold text-2xl my-6">Registrar nueva Reparacion</h1>
+            <div class="flex flex-col gap-2">
+                <div>
+                    <label for="serial" class="text-sm">Numero de Serie:</label>
+                    <input type="text" id="serial"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                        placeholder="Ingrese numero de serie:" required />
+                </div>
+
+                <div>
+                    <label for="imei" class="text-sm">Numero de IMEI:</label>
+                    <input type="text" id="imei"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                        placeholder="Ingrese numero de imei:" required />
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="brand" class="text-sm">Marca:</label>
+
+                    <select id="brand">
+                        <option value="">Seleccione una Marca:</option>
+                        <option value="iphone">Iphone</option>
+                        <option value="oppo">Oppo</option>
+                        <option value="samsung">Samsung</option>
+                        <option value="honor">Honor</option>
+                    </select>
+                </div>
+
+                <button type="button" id="send-repair"
+                    class="w-auto bg-blue-600 text-white rounded-lg px-6 py-2 hover:cursor-pointer hover:bg-white hover:text-blue-600 border border-blue-600 transition-colors duration-300 ease-in-out hover:shadow-lg my-6">Enviar</button>
+
+            </div>
+        </section>
+
+        <section id="first-diagnosis-section" class="hidden">
+            <h1 class="text-center uppercase font-semibold text-2xl my-6">Registrar Primer Diagnostico</h1>
+            <div class="flex flex-col gap-2">
+                <div>
+                    <label for="first-diagnosis" class="text-sm">Diagnostico:</label>
+                    <textarea type="text" id="first-diagnosis"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 min-h-[240px]"
+                        placeholder="Ingrese primer diagnostico:" required ></textarea>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="authorization" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="authorization" class="text-sm">Autorización Escrita del Usuario</label>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="payment" class="text-sm">Ingrese pago inicial:</label>
+
+                    <input type="text" id="payment"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                        placeholder="Ingrese abono inicial:" required />
+                </div>
+
+                <button type="button" id="send-first-diagnosis"
+                    class="w-auto bg-blue-600 text-white rounded-lg px-6 py-2 hover:cursor-pointer hover:bg-white hover:text-blue-600 border border-blue-600 transition-colors duration-300 ease-in-out hover:shadow-lg my-6">Guardar</button>
+
+            </div>
+        </section>
+
+        <section id="select-thecnician" class="hidden">
+                        <h1 class="text-center uppercase font-semibold text-2xl my-6">Seleccionar tecnico a reparar:</h1>
+            <div class="flex flex-col gap-2">
+ 
+                <div class="flex flex-col">
+                    <label for="brand" class="text-sm">Tecnico:</label>
+
+                    <select id="tech-select">
+                        <option value="">Seleccione una Tecnico:</option>
+                        <!-- <option value="31234123213">Juan Perez</option> -->
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="payment" class="text-sm">Ingrese las partes:</label>
+
+                    <input type="text" id="parts"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                        placeholder="Pantalla rota, Flex de Audio, ..." required />
+                </div>
+
+                <button type="button" id="send-tech"
+                    class="w-auto bg-blue-600 text-white rounded-lg px-6 py-2 hover:cursor-pointer hover:bg-white hover:text-blue-600 border border-blue-600 transition-colors duration-300 ease-in-out hover:shadow-lg my-6">Guardar</button>
+
+            </div>
+        </section>
+    </div>
+
+</body>
+<script src="/app.js" type="module"></script>
+
+</html>

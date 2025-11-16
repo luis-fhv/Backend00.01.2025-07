@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>View User</title>
+  </head>
+
+  <body
+    class="w-full min-h-[100svh] h-auto bg-[#f2f2f2] grid place-content-center"
+  >
+    <div
+      id="form-section"
+      class="flex flex-col gap-2 bg-gray-800 p-6 rounded-lg text-white shadow-lg shadow-black"
+    >
+      <label for="id">Ingrese el Id de la reparacion:</label>
+      <div class="flex flex-row gap-6">
+        <input
+          type="text"
+          id="id_input"
+          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+          placeholder="Ingrese id de la repacion:"
+          required
+        />
+        <button
+          id="send"
+          class="bg-blue-400 py-2 px-6 rounded-lg shadow-sm shadow-white uppercase font-medium border border-blue-400 hover:bg-white hover:text-blue-400 hover:shadow-blue-400 transition-colors duration-300 ease-in-out hover:cursor-pointer"
+        >
+          Enviar
+        </button>
+      </div>
+    </div>
+    <div
+      id="phone-section"
+      class="w-[90%] h-auto bg-white rounded-lg min-w-xs py-9 shadow-2xl px-5 hidden"
+    >
+      <div
+        class="w-full flex items-center justify-center uppercase font-semibold pb-9"
+      >
+        <h2>Estado de la repacion</h2>
+      </div>
+
+      <div class="flex items-center justify-center w-full">
+        <img
+          src="https://images.pexels.com/photos/226474/pexels-photo-226474.jpeg"
+          class="w-[240px] h-auto object-cover"
+          alt=""
+        />
+      </div>
+
+      <div class="py-4" id="section-information">
+        <div class="flex flex-row items-center justify-start gap-10">
+          <p class="flex flex-row justify-start w-full text-left">
+            Autorizacion:
+          </p>
+          <div class="w-3 h-3 bg-green-400 rounded"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    import { thecnicians_person } from "./data/thecnicians_person.js";
+    
+    const data = JSON.parse(localStorage.getItem("repairs"));
+    const id_input = document.getElementById("id_input");
+
+    document.getElementById("send").addEventListener("click", () => {
+      console.log(data);
+      console.log(id_input.value);
+
+      const repair = data.find((r) => r.id === Number(id_input.value));
+
+      console.log(repair);
+      if (repair) {
+        renderInformation(repair);
+      } else {
+        alert("Reparacion no encontrada");
+      }
+    });
+
+    function renderInformation(data) {
+      const section_phone = document.getElementById("phone-section");
+      section_phone.classList.remove("hidden");
+      const form_section = document.getElementById("form-section");
+      form_section.classList.add("hidden");
+      const section_information = document.getElementById(
+        "section-information"
+      );
+      
+      section_information.innerHTML = `
+            <div class="flex flex-row items-center justify-start gap-10">
+                <p class="flex flex-row justify-start w-full text-left">Autorizacion:</p>
+                <div class="w-3 h-3 ${data.authorization            ? 'bg-green-400' : 'bg-red-400'} rounded"></div>
+            </div>
+            <div class="flex flex-row items-center justify-start gap-10">
+                <p class="flex flex-row justify-start w-full text-left">Tecnico Asignado:</p>
+                <p class="flex flex-row justify-start w-full text-left">${data.thecnician}</p>
+            </div>
+            <div class="flex flex-row items-center justify-start gap-10">
+                <p class="flex flex-row justify-start w-full text-left">Partes:</p>
+                <p class="flex flex-row justify-start w-full text-left">${data.parts.join(', ')}</p>
+            </div>
+        `;
+    }
+  </script>
+</html>
